@@ -2,4 +2,6 @@ FROM node:19-slim
 
 USER node
 
-CMD ["tail", "-f",  "/dev/null"]
+WORKDIR /home/node/app
+
+CMD ["sh", "-c", "npm install && tail -f /dev/null"]
