@@ -39,5 +39,16 @@ describe('Category', () => {
 		expect(category.name).toBe('Category name');
 		expect(category.created_at).toBeInstanceOf(Date);
 		expect(category.created_at).toEqual(now);
+		expect(category.id).not.toBeNull();
+	});
+
+	it('should be able to create a new category and validate the uuid', () => {
+		const category = new Category({
+			name: 'Category name'
+		});
+
+		expect(category.id).toMatch(
+			/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/
+		);
 	});
 });
