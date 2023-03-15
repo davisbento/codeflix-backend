@@ -1,4 +1,5 @@
-import { generateUuid } from '../../../@shared/domains/unique-entity-id';
+import { UniqueEntityId } from '../../../@shared/domain/unique-entity-id';
+import Entity from '../../../@shared/entity/entity';
 
 export type CategoryProps = {
 	name: string;
@@ -7,11 +8,9 @@ export type CategoryProps = {
 	created_at?: Date;
 };
 
-export class Category {
-	public readonly id: string;
-
-	constructor(public readonly props: CategoryProps) {
-		this.id = generateUuid();
+export class Category extends Entity<CategoryProps> {
+	constructor(public readonly props: CategoryProps, id?: UniqueEntityId) {
+		super(props, id);
 		this.props.is_active = this.props.is_active ?? true;
 		this.props.description = this.props.description || undefined;
 		this.props.created_at = this.props.created_at || new Date();
